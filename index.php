@@ -147,6 +147,7 @@ input {
 
 <?php
 
+// Get program categories
 $sqlCat = "SELECT * FROM Programs GROUP BY programCategory";
 $resultCat = $conn->query($sqlCat);
 
@@ -166,10 +167,11 @@ while($rowCat = $resultCat->fetch_assoc()) {
         $checkDone = array();
         $currentRow = "";
 
-
+        // get progarms for each category
         while($row = $result->fetch_assoc()) {
             $checkExist = false ;
             foreach ($rowParent as $rowChild){
+                // check if program name add to table or not
                 if (in_array($row["program"], $rowChild)  && $rowChild["id"] != $checkDone[$rowChild['id']]){
                     $currentRow = $rowChild["id"];
                     $checkExist = true;
@@ -184,6 +186,7 @@ while($rowCat = $resultCat->fetch_assoc()) {
                 }
                 $checkDone[$rowChild['id']] = $rowChild['id'];
             }
+            // if not added then add program name to the table
             if($checkExist == false){
                     $programName = trim($row['program']);
                     $rowspanSql = "SELECT * FROM Programs WHERE program = '{$programName}'";
@@ -224,39 +227,40 @@ while($rowCat = $resultCat->fetch_assoc()) {
 
             ?>
 
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['6'])){ echo $StartEndDay['6'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['6']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['7'])){ echo $StartEndDay['7'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['7']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['8'])){ echo $StartEndDay['8'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['8']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['9'])){ echo $StartEndDay['9'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['9']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['10'])){ echo $StartEndDay['10'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['10']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['11'])){ echo $StartEndDay['11'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['11']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['12'])){ echo $StartEndDay['12'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['12']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
-                    <?php
-                        if(isset($_GET['admin'])){
-                            ?>
-                            <th class="cal-program">
-                            <form action="" method="post">
-                                <input type="hidden" name="delete"/>
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
-                                <input type="submit" value="delete" />
-                            </form>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['6'])){ echo $StartEndDay['6'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['6']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['7'])){ echo $StartEndDay['7'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['7']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['8'])){ echo $StartEndDay['8'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['8']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['9'])){ echo $StartEndDay['9'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['9']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['10'])){ echo $StartEndDay['10'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['10']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['11'])){ echo $StartEndDay['11'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['11']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <td data-id="<?php echo $row['id']; ?>"><a href="<?php echo $row['file']; ?>" class="subtitle9" target="_blank"><?php if(isset($StartEndDay['12'])){ echo $StartEndDay['12'] ; if(isset($_GET['admin'])){ ?> <form action="" method="post"><input type="hidden" name="deleteEvent"/><input type="hidden" name="id" value="<?php echo $eventId['12']; ?>" /><input type="submit" value="delete"/></form> <?php } } ?></a></td>
+            <?php
+            //if admin show actions
+            if(isset($_GET['admin'])){
+                ?>
+                <th class="cal-program">
+                <form action="" method="post">
+                    <input type="hidden" name="delete"/>
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
+                    <input type="submit" value="delete" />
+                </form>
 
-                            <form action="" method="post">
-                                <input type="hidden" name="update"/>
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
-                                <input type="submit" value="update" />
-                            </form>
+                <form action="" method="post">
+                    <input type="hidden" name="update"/>
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
+                    <input type="submit" value="update" />
+                </form>
 
-                             <form action="" method="post">
-                                <input type="hidden" name="addEvent"/>
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
-                                <input type="submit" value="add event" />
-                            </form>
-                            </tr>
-                            <?php
-                        }
-                    ?>
-                </tr>
+                 <form action="" method="post">
+                    <input type="hidden" name="addEvent"/>
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
+                    <input type="submit" value="add event" />
+                </form>
+              </th>
+                <?php
+            }
+            ?>
+            </tr>
             <?php
         }
 
@@ -265,6 +269,7 @@ while($rowCat = $resultCat->fetch_assoc()) {
     }
 }
 
+//if admin show add new program inputs
 if(isset($_GET['admin'])){
     ?>
     <tr>
